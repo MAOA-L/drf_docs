@@ -33,6 +33,11 @@
             <div class="col-md-7">
               <h4 class="panel-title title">
                 <i class="fa fa-link"></i> {{ endpoint.path }}
+                {% if endpoint.docstring %}
+                  -{{ endpoint.docstring }}
+                  {% else %}
+                  - 无说明文档
+                {% endif %}
               </h4>
             </div>
 
@@ -41,13 +46,6 @@
                 {% for method in endpoint.allowed_methods %}
                   <li class="method {{ method|lower }}">{{ method }}</li>
                 {% endfor %}
-                  <li class="method plug"
-                    data-toggle="modal"
-                    data-path="{{ endpoint.path }}"
-                    data-methods="{{ endpoint.allowed_methods }}"
-                    data-permissions="{{ endpoint.permissions }}"
-                    data-fields="{{ endpoint.fields_json }}">
-                    <i class="fa fa-plug"></i></li>
               </ul>
             </div>
           </div>
@@ -55,8 +53,9 @@
 
         <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
+            <!--方法注释说明-->
             {% if endpoint.docstring %}
-            <p class="lead">{{ endpoint.docstring }}</p>
+              <p class="lead" style="padding-inline-start: 40px;">{{ endpoint.docstring }}</p>
             {% endif %}
 
             {% if endpoint.errors %}
@@ -64,15 +63,39 @@
             {% endif %}
 
             {% if endpoint.fields %}
-            <p class="fields-desc">Fields:</p>
-              <ul class="list fields">
-              {% for field in endpoint.fields %}
-                <li class="field">{{ field.name }}: {{ field.type }} {% if field.required %}<span class="label label-primary label-required" title="Required">R</span>{% endif %}</li>
-              {% endfor %}
+<!--            <p class="fields-desc">Fields:</p>-->
+              <ul>
+                <table class="table table-bordered table-hover dataTables-example table-th-center" style="text-align: center">
+                  <thead>
+                  <tr>
+<!--                      <th>序号</th>-->
+                      <th>FILED_NAME</th>
+                      <th>ANNOTATION</th>
+                      <th>FILED_TYPE</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for field in endpoint.fields %}
+                      <tr class="gradeX">
+<!--                          <td class="center">{{ forloop.counter }}</td>-->
+                          <td class="center">
+                              {{ field.name }}
+                              {% if field.required %}
+                                  <span class="label label-primary label-required"
+                                        title="Required">R</span>
+                              {% endif %}
+                          </td>
+                          <td>{{ field.label }}</td>
+                          <td>{{ field.type }}</td>
+                      </tr>
+                  {% endfor %}
+                  </tbody>
+                </table>
               </ul>
             {% elif not endpoint.errors %}
             <p>No fields.</p>
             {% endif %}
+
           </div>
         </div>
       </div>
