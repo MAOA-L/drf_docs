@@ -31,7 +31,7 @@
         <div class="panel-heading" role="tab" data-toggle="collapse" data-target="#{{ endpoint.path|slugify }}">
           <div class="row">
             <div class="col-md-7">
-              <h4 class="panel-title title">
+              <h4 class="panel-title title panel-title-limit">
                 <i class="fa fa-link"></i> {{ endpoint.path }}
                 {% if endpoint.docstring %}
                   -{{ endpoint.docstring }}
@@ -55,7 +55,7 @@
           <div class="panel-body">
             <!--方法注释说明-->
             {% if endpoint.docstring %}
-              <p class="lead" style="padding-inline-start: 40px;">{{ endpoint.docstring }}</p>
+              <p class="lead" style="padding-inline-start: 40px; padding-inline-end: 50px;">{{ endpoint.docstring }}</p>
             {% endif %}
 
             {% if endpoint.errors %}
@@ -64,7 +64,7 @@
 
             {% if endpoint.fields %}
 <!--            <p class="fields-desc">Fields:</p>-->
-              <ul>
+              <ul style="padding-inline-start: 0px;">
                 <table class="table table-bordered table-hover dataTables-example table-th-center" style="text-align: center">
                   <thead>
                   <tr>
@@ -100,10 +100,34 @@
         </div>
       </div>
     {% endfor %}
-
     </div>
 
   {% endfor %}
+<!--错误代码-->
+    {% if translate %}
+        <ul style="padding-inline-start: 0px;">
+            <table class="table table-bordered table-hover dataTables-example table-th-center"
+                   style="text-align: center">
+                <thead>
+                <tr>
+                    <th>error_code</th>
+                    <th>annotation</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for key,value in translate.items %}
+                    <tr class="gradeX">
+                        <td>{{ key }}</td>
+                        <td>{{ value }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </ul>
+
+    {% endif %}
+
+<!--错误代码结束-->
   {% elif not query %}
     <h2 class="text-center">There are currently no api endpoints to document.</h2>
   {% else %}

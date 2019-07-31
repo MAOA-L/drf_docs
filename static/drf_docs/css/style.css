@@ -1505,12 +1505,16 @@ p {
     margin-bottom: 21px;
     font-size: 17px;
     font-weight: 300;
-    line-height: 1.4
+    line-height: 1.4;
+    background-color: #dde4e6;
+    min-height: 45px;
+    line-height: 45px;
+    border-radius: 5px;
 }
 
 @media (min-width: 768px) {
     .lead {
-        font-size: 22.5px
+        font-size: 20px
     }
 }
 
@@ -5869,7 +5873,11 @@ a.list-group-item-danger.active, a.list-group-item-danger.active:focus, a.list-g
     font-size: 17px;
     color: inherit
 }
-
+.panel-title-limit {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 .panel-title > .small, .panel-title > .small > a, .panel-title > a, .panel-title > small, .panel-title > small > a {
     color: inherit
 }

@@ -23,12 +23,11 @@ class ApiDocumentation(object):
 
     def get_all_view_names(self, urlpatterns, parent_pattern=None):
         for pattern in urlpatterns:
-            # if isinstance(pattern, RegexURLResolver):
             if isinstance(pattern, URLResolver):
-                # parent_pattern = None if pattern._regex == "^" else pattern
+                if "admin" in pattern.pattern._regex:
+                    continue
                 parent_pattern = None if pattern.pattern._regex.split(pattern.namespace)[0] == "^" else pattern
                 self.get_all_view_names(urlpatterns=pattern.url_patterns, parent_pattern=parent_pattern)
-            # elif isinstance(pattern, RegexURLPattern) and self._is_drf_view(pattern) and not self._is_format_endpoint(pattern):
             elif isinstance(pattern, URLPattern) and self._is_drf_view(pattern) and not self._is_format_endpoint(pattern):
                 api_endpoint = ApiEndpoint(pattern, parent_pattern)
                 self.endpoints.append(api_endpoint)

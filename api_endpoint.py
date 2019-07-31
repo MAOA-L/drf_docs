@@ -32,6 +32,7 @@ class ApiEndpoint(object):
 
     def __get_docstring__(self):
         return inspect.getdoc(self.callback)
+        # return str(self.callback.__doc__).replace("\n", "<br>")
 
     def __get_permissions_class__(self):
         for perm_class in self.pattern.callback.cls.permission_classes:
