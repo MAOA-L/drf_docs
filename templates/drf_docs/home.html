@@ -54,9 +54,12 @@
         <div id="{{ endpoint.path|slugify }}" class="panel-collapse collapse" role="tabpanel">
           <div class="panel-body">
             <!--方法注释说明-->
-            {% if endpoint.docstring %}
-              <p class="lead" style="padding-inline-start: 40px; padding-inline-end: 50px;">{{ endpoint.docstring }}</p>
-            {% endif %}
+              {% if endpoint.docstring %}
+                <!--class="lead"-->
+                <p class="">{{ endpoint.docstring | escape | linebreaks }}</p>
+              {% endif %}
+
+
 
             {% if endpoint.errors %}
             <div class="alert alert-danger" role="alert">Oops! There was something wrong with {{ endpoint.errors }}. Please check your code.</div>

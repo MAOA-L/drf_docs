@@ -1508,7 +1508,7 @@ p {
     line-height: 1.4;
     background-color: #dde4e6;
     min-height: 45px;
-    line-height: 45px;
+    /*line-height: 45px;*/
     border-radius: 5px;
 }
 
