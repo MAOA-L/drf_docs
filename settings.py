@@ -2,7 +2,6 @@ from django.conf import settings
 import importlib
 
 class DRFSettings(object):
-
     def __init__(self):
         self.drf_settings = {
             "HIDE_DOCS": self.get_setting("HIDE_DOCS") or False,
@@ -11,6 +10,7 @@ class DRFSettings(object):
         # 获取用户settings中的ERROR_CODE
         error_code = self.get_setting("ERROR_CODE") or False
         if error_code:
+            #  TODO 异常处理
             ins = importlib.import_module(error_code)
             # 获取翻译
             translate = getattr(ins, "translate", None)
