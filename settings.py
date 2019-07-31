@@ -15,6 +15,8 @@ class DRFSettings(object):
             # 获取翻译
             translate = getattr(ins, "translate", None)
             self.drf_settings['translate'] = translate
+        else:
+            self.drf_settings['translate'] = {}
 
     def get_setting(self, name):
         try:
