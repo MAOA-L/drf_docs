@@ -34,3 +34,5 @@ class DRFSettings(object):
     @property
     def settings(self):
         return self.drf_settings
+
+# dev增加一行注释
