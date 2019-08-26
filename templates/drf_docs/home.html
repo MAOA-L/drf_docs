@@ -109,23 +109,28 @@
 <!--错误代码-->
     {% if translate %}
         <ul style="padding-inline-start: 0px;">
+            {% for item in translate %}
             <table class="table table-bordered table-hover dataTables-example table-th-center"
                    style="text-align: center">
                 <thead>
+                <tr>
+                    <th colspan="2">{{item.desc}}</th>
+                </tr>
                 <tr>
                     <th>error_code</th>
                     <th>annotation</th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for key,value in translate.items %}
+                    {% for key, value in item.data.items %}
                     <tr class="gradeX">
-                        <td>{{ key }}</td>
+                        <td style="max-width: 20%">{{ key }}</td>
                         <td>{{ value }}</td>
                     </tr>
-                {% endfor %}
+                    {% endfor %}
                 </tbody>
             </table>
+            {% endfor %}
         </ul>
 
     {% endif %}
